@@ -9,3 +9,9 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Test {
+  id Int @id @default(autoincrement())
+  text String
+  date DateTime @default(now())
+}
