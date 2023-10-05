@@ -1,0 +1,22 @@
+-- CreateTable
+CREATE TABLE "STATIONS" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "ward_id" INTEGER NOT NULL,
+    "line_id" INTEGER NOT NULL,
+    "Went_cnt" INTEGER NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "STATIONS_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "WARDS" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+
+    CONSTRAINT "WARDS_pkey" PRIMARY KEY ("id")
+);
+
+-- AddForeignKey
+ALTER TABLE "STATIONS" ADD CONSTRAINT "STATIONS_ward_id_fkey" FOREIGN KEY ("ward_id") REFERENCES "WARDS"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
