@@ -5,7 +5,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
+datasource supabase {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
@@ -24,6 +24,7 @@ model STATIONS {
   line_id Int
   Went_cnt Int 
   date DateTime @default(now())
+  @@unique([Went_cnt])
 }
 
 model WARDS{
