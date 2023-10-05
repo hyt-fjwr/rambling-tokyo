@@ -20,5 +20,19 @@ export const TEST = async (req: Request, res: NextResponse) => {
         return NextResponse.json({message : "error", error }, {status : 500});
     } finally {
         await prisma.$disconnect();
+    } 
+};
+
+export const POST = async (req: Request, res: NextResponse) => {
+    try {
+        const { text } = await req.json();
+        
+        await main();
+        const test = await prisma.test.create({data : { text } } );
+        return NextResponse.json({message : "succeed", test }, {status : 201 });
+    } catch (error) {
+        return NextResponse.json({message : "error", error }, {status : 500 });
+    } finally {
+        await prisma.$disconnect();
     }
 };
