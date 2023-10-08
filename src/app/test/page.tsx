@@ -16,7 +16,11 @@ const Home: NextPage = () => {
   // ボタンがクリックされたときの処理
   const handleClick = () => {
     // 1 から 100 の範囲でランダムな整数を生成して状態を更新する
-    setRandomNumber(getRandomInt(1, 100));
+    setRandomNumber(getRandomInt(1, 23));
+
+  const handleSubmit = () => {
+
+    };
   };
 
   return (
@@ -27,8 +31,10 @@ const Home: NextPage = () => {
       <main>
         <h1>Random Number Generator</h1>
         <p>ボタンを押すと、1 から 100 の範囲でランダムな整数が表示されます。</p>
-        <button className="py-2 px-2 bg-gray-800 rounded-xl hover:border hover:border-gray-500" onClick={handleClick}>Generate</button>
-        <p>Random Number: {randomNumber}</p>
+        <form>
+          <button className="py-2 px-2 bg-gray-800 rounded-xl hover:border hover:border-gray-500" onClick={handleClick}>Generate</button>
+          <p>Random Number: {randomNumber}</p>
+        </form>
       </main>
     </div>
   );

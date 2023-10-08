@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,24 +8,38 @@ datasource supabase {
 }
 
 model Test {
-  id Int @id @default(autoincrement())
+  id   Int      @id @default(autoincrement())
   text String
   date DateTime @default(now())
 }
 
 model STATIONS {
-  id Int @id @default(autoincrement())
-  name String
-  ward_id Int
-  ward WARDS @relation(fields: [ward_id], references: [id])
-  line_id Int
-  Went_cnt Int 
-  date DateTime @default(now())
-  @@unique([Went_cnt])
+  id       Int      @id @default(autoincrement())
+  name     String
+  ward_id  Int
+  line_id  Int
+  Went_cnt Int      @unique
+  date     DateTime @default(now())
+  ward     WARDS    @relation(fields: [ward_id], references: [id])
+  line STATION_LINE[]
 }
 
-model WARDS{
+model WARDS {
+  id       Int        @id @default(autoincrement())
+  name     String
+  stations STATIONS[]
+}
+
+model LINES{
   id Int @id @default(autoincrement())
   name String
-  stations STATIONS[]
+  stations STATION_LINE[]
+}
+
+model STATION_LINE{
+  id Int @id @default(autoincrement())
+  station_id Int
+  station_name STATIONS @relation(fields: [station_id], references: [id])
+  line_id Int
+  line_name LINES @relation(fields: [line_id], references: [id])
 }
